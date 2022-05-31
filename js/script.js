@@ -44,17 +44,21 @@ async function displayImages(page) {
   prepareImages();
 }
 
-// Add or remove from favorites 
+// Add or remove from favorites
 function prepareImages() {
   checkImageLoaded();
   const images = document.querySelectorAll('.like-btn');
-  images.forEach((img) => img.addEventListener('click', (event) => {
-    let likeBtn = event.target;
-    let itemURL = likeBtn.previousElementSibling.currentSrc;
-    likeBtn.classList.toggle('liked')
-
-    !state.favorites[itemURL] ? saveFavorite(itemURL) : removeFavorite(itemURL);
-  }));
+  images.forEach((img) => {
+    if (!img.getAttribute('listener')) {
+      img.setAttribute('listener', 'true');
+      img.addEventListener('click', (event) => {
+        let likeBtn = event.target;
+        let itemURL = likeBtn.previousElementSibling.currentSrc;
+        likeBtn.classList.toggle('liked')
+        !state.favorites[itemURL] ? saveFavorite(itemURL) : removeFavorite(itemURL);
+      });
+    }
+  });
 }
 
 // Check if all images were loaded
