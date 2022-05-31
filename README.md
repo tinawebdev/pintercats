@@ -9,7 +9,7 @@
 * The app stores liked images in LocalStorage.
 
 ## Demo
-You can view a live version [here](https://tinawebdev.github.io/pintercats/).
+You can view a live version [here](https://tinawebdev.github.io/pintercats/source/).
 
 <div style="display: flex; align-items: flex-start;">
   <table><tr><td>
