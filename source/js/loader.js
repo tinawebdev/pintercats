@@ -1,7 +1,7 @@
 const loader = document.getElementById('img-loader');
 
 const loaderContent = `
-  <img src="source/img/loader/cat.gif" alt="Loading">
+  <img src="img/loader/cat.gif" alt="Loading">
   <p>... loading more cats ...</p>
 `
 
