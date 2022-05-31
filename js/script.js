@@ -95,7 +95,9 @@ function setCurrentPage() {
 
 // Show results or favorites container
 const showPage = (page) => () => {
-  window.removeEventListener('scroll', loadMoreImages);
+  page === 'favorites' 
+    ? window.removeEventListener('scroll', loadMoreImages) 
+    : window.addEventListener('scroll', loadMoreImages);
   state.currentPage = page;
   displayImages(state.currentPage);
 };
