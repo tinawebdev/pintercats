@@ -117,7 +117,7 @@ body {
 }
 
 /* Loader */
-.load-text {
+.loader {
   display: block;
   text-align: center;
   padding: 25px;

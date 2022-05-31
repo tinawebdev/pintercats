@@ -1,8 +1,7 @@
 import { renderImgContainer } from './renderContent.js';
 import renderNavigation from './renderNavigation.js';
 import getData from './getData.js';
-
-const loader = document.getElementById('loader');
+import { showLoadingSpinner, removeLoadingSpinner } from './loader.js';
 
 const state = {
   resultsArray: [],
@@ -29,6 +28,7 @@ async function displayImages(page) {
   if (page === 'results') {
     renderNavigation(state.currentPage);
     setCurrentPage();
+    showLoadingSpinner(); /* Show Loader */
     state.resultsArray = await getData();
     state.imagesLoaded = 0;
     state.totalImages = state.resultsArray.length;
@@ -36,7 +36,7 @@ async function displayImages(page) {
   }
 
   if (page === 'favorites') {
-    loader.hidden = true;
+    removeLoadingSpinner(); /* Remove Loader */
     renderNavigation(state.currentPage);
     setCurrentPage();
     renderImgContainer(page, state.favorites)
@@ -69,8 +69,7 @@ function checkImageLoaded() {
     state.imagesLoaded++;
     if (state.imagesLoaded === state.totalImages) {
       state.readyToFetch = true;
-      //  Hide Loader
-      loader.hidden = true;
+      removeLoadingSpinner(); /* Remove Loader */
     }
   }
 }
