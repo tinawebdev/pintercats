@@ -84,22 +84,20 @@ function removeFavorite(itemURL) {
   state.currentPage === 'favorites' ? displayImages(state.currentPage) : false;
 }
 
-// Show results or favorites container
+// Set current page on click
 function setCurrentPage() {
   const favoritesLink = document.getElementById('favorites');
   const resultsLink = document.getElementById('results');
 
-  favoritesLink.addEventListener('click', function() {
-    window.removeEventListener('scroll', loadMoreImages);
-    state.currentPage = 'favorites';
-    displayImages(state.currentPage);
-  });
-
-  resultsLink.addEventListener('click', function() {
-    window.addEventListener('scroll', loadMoreImages)
-    state.currentPage = 'results';
-    displayImages(state.currentPage);
-  });
+  favoritesLink.addEventListener('click', showPage('favorites'));
+  resultsLink.addEventListener('click', showPage('results'));
 }
+
+// Show results or favorites container
+const showPage = (page) => () => {
+  window.removeEventListener('scroll', loadMoreImages);
+  state.currentPage = page;
+  displayImages(state.currentPage);
+};
 
 displayImages('results');
