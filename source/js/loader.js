@@ -4,14 +4,13 @@ const loaderContent = `
   <img src="img/loader/cat.gif" alt="Loading">
   <p>... loading more cats ...</p>
 `
+loader.insertAdjacentHTML("beforeend", loaderContent);
 
 function showLoadingSpinner() {
-  loader.insertAdjacentHTML("beforeend", loaderContent);
   loader.classList.remove('hide');
 }
 
 function removeLoadingSpinner() {
-  loader.textContent = "";
   loader.classList.add('hide');
 }
 
