@@ -12,8 +12,10 @@
 You can view a live version [here](https://tinawebdev.github.io/pintercats/).
 
 <div style="display: flex; align-items: flex-start;">
-  <img src="./screenshots/demo1.png" height="400">
-  <img src="./screenshots/demo2.png" height="400">
+  <table><tr><td>
+    <img src="./screenshots/demo1.png" height="250" width="250">
+    <img src="./screenshots/demo2.png" height="250" width="250">
+  </td></tr></table>
 </div>
 
 ## To use the code
