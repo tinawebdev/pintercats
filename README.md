@@ -7,6 +7,8 @@
 * Dynamically inserting the images into the DOM on initial loading.
 * When the user scrolls close to the bottom of the page the app makes another GET request to the API and inserts images into the DOM (lazy loading).
 * The app stores liked images in LocalStorage.
+* Module bundler: [Webpack 5](https://webpack.js.org/)
+* Linter: [ESLint](https://eslint.org/) ([eslint-config-google](https://github.com/google/eslint-config-google))
 
 ## Demo
 You can view a live version [here](https://tinawebdev.github.io/pintercats/).
@@ -18,17 +20,19 @@ You can view a live version [here](https://tinawebdev.github.io/pintercats/).
   </td></tr></table>
 </div>
 
-## To use the code
-* Download the repository.
+## System requirements
+* [Node.js](https://nodejs.org/en/)
+* [Git](https://github.com/git-guides/install-git)
+
+## Installation
+To install, run the following commands into a Terminal window:
 ```
 git clone git@github.com:tinawebdev/pintercats.git
-```
-
-* Go to the `pintercats` folder and open the `index.html` file.
-```
 cd pintercats
+npm install
+npm run build-dev
 ```
 
-## Tools
+## Resources
 * Fonts: [Google Fonts](https://fonts.google.com/)
 * Images: [TheCatApi](https://docs.thecatapi.com/)
