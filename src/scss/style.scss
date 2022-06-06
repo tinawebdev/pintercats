@@ -1,9 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-:root {
-  --primary-color: #2196F3;
-  --secondary-color: #1E88E5;
-}
+$primary-color: #2196F3;
+$secondary-color: #1E88E5;
 
 html {
   box-sizing: border-box;
@@ -27,7 +25,7 @@ body {
   position: fixed;
   margin: 0;
   width: 100%;
-  background-color: var(--primary-color);
+  background-color: $primary-color;
   color: #fff;
   display: flex;
   justify-content: flex-start;
@@ -43,7 +41,7 @@ body {
 }
 
 .nav-link:hover, .is-active {
-  background-color: var(--secondary-color);
+  background-color: $secondary-color;
 }
 
 /* Images */
@@ -62,6 +60,11 @@ body {
 .image-container {
   position: relative;
   transition: all 0.3s ease-out 0s;
+
+  &:hover {
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    transform: scale(1.1);
+  }
 }
 
 .image {
@@ -72,47 +75,46 @@ body {
   cursor: pointer;
 }
 
-.image-container:hover {
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  transform: scale(1.1);
-}
-
 .image:hover + .like-btn:after {
   color: #F24E1E;
 }
 
 /* Likes */
-.like-btn:after {
-  position: absolute;
-  color: transparent;
-  font-size: 48px;
-  top: 190px;
-  left: 190px;
-  font-family: "Font Awesome 5 Free"; content: "\f004";
-  cursor: pointer;
-  transition: all 0.5s ease-out 0s;
+.like-btn {
+  &::after {
+    position: absolute;
+    color: transparent;
+    font-size: 48px;
+    top: 190px;
+    left: 190px;
+    font-family: "Font Awesome 5 Free"; content: "\f004";
+    cursor: pointer;
+    transition: all 0.5s ease-out 0s;
+  }
+
+  &:hover:after {
+    color: #F24E1E;
+    font-family: "Font Awesome 5 Free"; 
+    font-weight: 800; 
+    content: "\f004";
+  }
 }
 
-.like-btn:hover:after {
-  color: #F24E1E;
-  font-family: "Font Awesome 5 Free"; 
-  font-weight: 800; 
-  content: "\f004";
-}
+.liked {
+  &:after {
+    position: absolute;
+    color: transparent;
+    font-size: 48px;
+    top: 190px;
+    left: 190px;
+    font-weight: 800;
+    font-family: "Font Awesome 5 Free"; content: "\f004";
+    cursor: pointer;
+  }
 
-.liked:after {
-  position: absolute;
-  color: transparent;
-  font-size: 48px;
-  top: 190px;
-  left: 190px;
-  font-weight: 800;
-  font-family: "Font Awesome 5 Free"; content: "\f004";
-  cursor: pointer;
-}
-
-.liked:hover:after {
-  color: #F24E1E;
+  &::hover:after {
+    color: #F24E1E;
+  }
 }
 
 /* Loader */

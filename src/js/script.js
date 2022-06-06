@@ -2,6 +2,7 @@ import { renderImgContainer } from './renderContent.js';
 import renderNavigation from './renderNavigation.js';
 import getData from './getData.js';
 import { showLoadingSpinner, removeLoadingSpinner } from './loader.js';
+import '../scss/style.scss';
 
 const state = {
   resultsArray: [],
