@@ -112,7 +112,7 @@ body {
     cursor: pointer;
   }
 
-  &::hover:after {
+  &:hover:after {
     color: #F24E1E;
   }
 }

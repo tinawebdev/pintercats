@@ -1,6 +1,6 @@
 // The Cat API
-let count = 15;
-let apiUrl = `https://api.thecatapi.com/v1/images/search?limit=${count}`;
+const count = 15;
+const apiUrl = `https://api.thecatapi.com/v1/images/search?limit=${count}`;
 
 const requestParameters = {
   headers: {
@@ -16,4 +16,4 @@ export default async function getData() {
   } catch (error) {
     // Catch Error Here
   }
-};
+}

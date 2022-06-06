@@ -1,22 +1,22 @@
-import { renderImgContainer } from './renderContent.js';
+import {renderImgContainer} from './renderContent.js';
 import renderNavigation from './renderNavigation.js';
 import getData from './getData.js';
-import { showLoadingSpinner, removeLoadingSpinner } from './loader.js';
+import {showLoadingSpinner, removeLoadingSpinner} from './loader.js';
 import '../scss/style.scss';
 
 const state = {
   resultsArray: [],
-  favorites: localStorage.getItem('catsFavorites') 
+  favorites: localStorage.getItem('catsFavorites')
     ? JSON.parse(localStorage.getItem('catsFavorites'))
     : {},
   currentPage: 'results',
   imagesLoaded: 0,
   totalImages: 0,
   readyToFetch: false,
-}
+};
 
 // Check to see if scrolling near bottom of page, load more cat images
-window.addEventListener('scroll', loadMoreImages)
+window.addEventListener('scroll', loadMoreImages);
 async function loadMoreImages() {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000 && state.readyToFetch) {
     state.readyToFetch = false;
@@ -33,14 +33,14 @@ async function displayImages(page) {
     state.resultsArray = await getData();
     state.imagesLoaded = 0;
     state.totalImages = state.resultsArray.length;
-    renderImgContainer(page, state.resultsArray)
+    renderImgContainer(page, state.resultsArray);
   }
 
   if (page === 'favorites') {
     removeLoadingSpinner(); /* Remove Loader */
     renderNavigation(state.currentPage);
     setCurrentPage();
-    renderImgContainer(page, state.favorites)
+    renderImgContainer(page, state.favorites);
   }
   prepareImages();
 }
@@ -53,9 +53,9 @@ function prepareImages() {
     if (!img.getAttribute('listener')) {
       img.setAttribute('listener', 'true');
       img.addEventListener('click', (event) => {
-        let likeBtn = event.target;
-        let itemURL = likeBtn.previousElementSibling.currentSrc;
-        likeBtn.classList.toggle('liked')
+        const likeBtn = event.target;
+        const itemURL = likeBtn.previousElementSibling.currentSrc;
+        likeBtn.classList.toggle('liked');
         !state.favorites[itemURL] ? saveFavorite(itemURL) : removeFavorite(itemURL);
       });
     }
@@ -99,8 +99,8 @@ function setCurrentPage() {
 
 // Show results or favorites container
 const showPage = (page) => () => {
-  page === 'favorites' 
-    ? window.removeEventListener('scroll', loadMoreImages) 
+  page === 'favorites'
+    ? window.removeEventListener('scroll', loadMoreImages)
     : window.addEventListener('scroll', loadMoreImages);
   state.currentPage = page;
   displayImages(state.currentPage);
