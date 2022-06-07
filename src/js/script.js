@@ -6,9 +6,9 @@ import '../scss/style.scss';
 
 const state = {
   resultsArray: [],
-  favorites: localStorage.getItem('catsFavorites')
-    ? JSON.parse(localStorage.getItem('catsFavorites'))
-    : {},
+  favorites: localStorage.getItem('catsFavorites') ?
+    JSON.parse(localStorage.getItem('catsFavorites')) :
+    {},
   currentPage: 'results',
   imagesLoaded: 0,
   totalImages: 0,
@@ -18,6 +18,7 @@ const state = {
 // Check to see if scrolling near bottom of page, load more cat images
 window.addEventListener('scroll', loadMoreImages);
 async function loadMoreImages() {
+  // eslint-disable-next-line max-len
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000 && state.readyToFetch) {
     state.readyToFetch = false;
     displayImages('results');
@@ -56,7 +57,9 @@ function prepareImages() {
         const likeBtn = event.target;
         const itemURL = likeBtn.previousElementSibling.currentSrc;
         likeBtn.classList.toggle('liked');
-        !state.favorites[itemURL] ? saveFavorite(itemURL) : removeFavorite(itemURL);
+        !state.favorites[itemURL] ?
+          saveFavorite(itemURL) :
+          removeFavorite(itemURL);
       });
     }
   });
@@ -99,9 +102,9 @@ function setCurrentPage() {
 
 // Show results or favorites container
 const showPage = (page) => () => {
-  page === 'favorites'
-    ? window.removeEventListener('scroll', loadMoreImages)
-    : window.addEventListener('scroll', loadMoreImages);
+  page === 'favorites' ?
+    window.removeEventListener('scroll', loadMoreImages) :
+    window.addEventListener('scroll', loadMoreImages);
   state.currentPage = page;
   displayImages(state.currentPage);
 };
