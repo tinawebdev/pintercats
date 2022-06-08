@@ -1,8 +1,10 @@
 const imagesContainer = document.querySelector('#images-container');
 let favorites = [];
 
+// To define 'like' button class
 const isFavorite = (img) => !favorites[img] ? 'like-btn' : 'like-btn liked';
 
+// Image container
 const item = (img) => {
   return `
     <div class="image-container">
@@ -20,7 +22,7 @@ const renderResults = (results) => {
 };
 
 // Render favorites
-const renderFavorites = (favorites) => {
+const renderFavorites = () => {
   Object.values(favorites).forEach((img) => {
     imagesContainer.insertAdjacentHTML('beforeend', item(img));
   });
@@ -29,9 +31,12 @@ const renderFavorites = (favorites) => {
 // Results or favorites
 const renderImgContainer = (page, data) => {
   favorites = data.favorites;
-  page === 'results' ?
-    renderResults(data.resultsArray) :
-    renderFavorites(favorites);
+  if (page === 'favorites') {
+    clearContent();
+    renderFavorites();
+  } else {
+    renderResults(data.resultsArray);
+  }
 };
 
 // Clear page

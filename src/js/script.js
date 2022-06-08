@@ -26,7 +26,7 @@ async function loadMoreImages() {
 }
 
 async function renderData(page) {
-  setActiveLink();
+  prepareNavLinks();
   await displayImages(page);
   checkImageLoaded();
   prepareLikeBtns();
@@ -39,11 +39,8 @@ async function displayImages(page) {
     state.resultsArray = await getData();
     state.imagesLoaded = 0;
     state.totalImages = state.resultsArray.length;
-    renderImgContainer(page, state);
-  } else {
-    clearContent();
-    renderImgContainer(page, state);
   }
+  renderImgContainer(state.currentPage, state);
 }
 
 // Add or remove from favorites
@@ -90,11 +87,11 @@ function removeFavorite(itemURL) {
   state.currentPage === 'favorites' ? renderData(state.currentPage) : false;
 }
 
-// Set current page on click
-function setActiveLink() {
+// Add listeners to nav links
+function prepareNavLinks() {
   const favoritesLink = document.getElementById('favorites');
   const resultsLink = document.getElementById('results');
-
+  // Show on click
   favoritesLink.addEventListener('click', showPage('favorites'));
   resultsLink.addEventListener('click', showPage('results'));
 }
@@ -102,11 +99,11 @@ function setActiveLink() {
 // Show results or favorites container
 const showPage = (page) => () => {
   state.currentPage = page;
-  removeLoadingSpinner();
-  clearContent();
   state.currentPage === 'favorites' ?
     window.removeEventListener('scroll', loadMoreImages) :
     window.addEventListener('scroll', loadMoreImages);
+  removeLoadingSpinner();
+  clearContent();
   renderNavigation(state.currentPage);
   renderData(state.currentPage);
 };
