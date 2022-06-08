@@ -76,8 +76,10 @@ function checkImageLoaded() {
 
 // Add image to favorites
 function saveFavorite(itemURL) {
-  state.favorites[itemURL] = itemURL;
-  localStorage.setItem('catsFavorites', JSON.stringify(state.favorites));
+  if (itemURL) {
+    state.favorites[itemURL] = itemURL;
+    localStorage.setItem('catsFavorites', JSON.stringify(state.favorites));
+  }
 }
 
 // Remove images from favorites
