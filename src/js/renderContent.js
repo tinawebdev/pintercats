@@ -1,49 +1,40 @@
-const resultsContainer = document.querySelector('#results-container');
-const favoritesContainer = document.querySelector('#favorites-container');
+const imagesContainer = document.querySelector('#images-container');
+let favorites = [];
 
-// Show or hide container
-const toggleContainers = (containerToShow, containerToHide) => {
-  containerToShow.classList.remove('hide');
-  containerToHide.classList.add('hide');
+const isFavorite = (img) => !favorites[img] ? 'like-btn' : 'like-btn liked';
+
+const item = (img) => {
+  return `
+    <div class="image-container">
+      <img src="${img}" alt="Cat Image" class="image">
+      <a class="${isFavorite(img)}"></a>
+    </div>
+  `;
 };
 
-// Render results container
+// Render results
 const renderResults = (results) => {
   results.forEach((img) => {
-    const item = `
-      <div class="image-container">
-        <img src="${img.url}" alt="Cat Image" class="image">
-        <a class="like-btn"></a>
-      </div>
-    `;
-    resultsContainer.insertAdjacentHTML('beforeend', item);
+    imagesContainer.insertAdjacentHTML('beforeend', item(img.url));
   });
 };
 
-// Render favorites container
+// Render favorites
 const renderFavorites = (favorites) => {
-  favoritesContainer.textContent = '';
   Object.values(favorites).forEach((img) => {
-    const item = `
-      <div class="image-container">
-        <img src="${img}" alt="Cat Image" class="image">
-        <a class="like-btn liked"></a>
-      </div>
-    `;
-    favoritesContainer.insertAdjacentHTML('beforeend', item);
+    imagesContainer.insertAdjacentHTML('beforeend', item(img));
   });
 };
 
 // Results or favorites
 const renderImgContainer = (page, data) => {
-  if (page === 'results') {
-    toggleContainers(resultsContainer, favoritesContainer);
-    renderResults(data);
-  }
-  if (page === 'favorites') {
-    toggleContainers(favoritesContainer, resultsContainer);
-    renderFavorites(data);
-  }
+  favorites = data.favorites;
+  page === 'results' ?
+    renderResults(data.resultsArray) :
+    renderFavorites(favorites);
 };
 
-export {renderImgContainer};
+// Clear page
+const clearContent = () => imagesContainer.textContent = '';
+
+export {renderImgContainer, clearContent};
