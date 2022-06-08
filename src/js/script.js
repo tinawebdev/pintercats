@@ -40,7 +40,7 @@ async function displayImages(page) {
     state.imagesLoaded = 0;
     state.totalImages = state.resultsArray.length;
   }
-  renderImgContainer(state.currentPage, state);
+  renderImgContainer(state);
 }
 
 // Add or remove from favorites
