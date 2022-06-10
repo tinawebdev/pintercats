@@ -9,8 +9,11 @@
 * Dynamically inserting the images into the DOM on initial loading.
 * When the user scrolls close to the bottom of the page the app makes another GET request to the API and inserts images into the DOM (lazy loading).
 * The app stores liked images in LocalStorage.
-* Module bundler: [Webpack 5](https://webpack.js.org/)
-* Linter: [ESLint](https://eslint.org/) ([eslint-config-google](https://github.com/google/eslint-config-google))
+
+## Technology Stack
+* Module bundler: [Webpack 5](https://webpack.js.org/) - For build a dependency graph of all the files and their dependencies, and bundle all the files.
+* Linter: [ESLint](https://eslint.org/) ([eslint-config-google](https://github.com/google/eslint-config-google)) - For improving code quality.
+* Icon library and toolkit: [Font Awesome Free v5.15.4](https://fontawesome.com/) - For add icons using CSS Pseudo-elements.
 
 ## Live demo
 See the live version **[here](https://tinawebdev.github.io/pintercats/)**.
