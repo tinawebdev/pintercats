@@ -25,6 +25,7 @@ async function loadMoreImages() {
   }
 }
 
+// Show content
 async function renderData(page) {
   prepareNavLinks();
   await displayImages(page);
@@ -32,7 +33,16 @@ async function renderData(page) {
   prepareLikeBtns();
 }
 
-// Create elements for imagess, add to DOM
+// Add listeners to nav links
+function prepareNavLinks() {
+  const favoritesLink = document.getElementById('favorites');
+  const resultsLink = document.getElementById('results');
+  // Show on click
+  favoritesLink.addEventListener('click', showPage('favorites'));
+  resultsLink.addEventListener('click', showPage('results'));
+}
+
+// Create elements for images, add to DOM
 async function displayImages(page) {
   if (page === 'results') {
     showLoadingSpinner(); /* Show Loader */
@@ -43,7 +53,20 @@ async function displayImages(page) {
   renderImgContainer(state);
 }
 
-// Add or remove from favorites
+// Check if all images were loaded
+function checkImageLoaded() {
+  const images = document.querySelectorAll('.image');
+  images.forEach((img) => img.addEventListener('load', imageLoaded));
+  function imageLoaded() {
+    state.imagesLoaded++;
+    if (state.imagesLoaded === state.totalImages) {
+      state.readyToFetch = true;
+      removeLoadingSpinner(); /* Remove Loader */
+    }
+  }
+}
+
+// Add or remove from favorites buttons
 function prepareLikeBtns() {
   const images = document.querySelectorAll('.like-btn');
   images.forEach((img) => {
@@ -61,19 +84,6 @@ function prepareLikeBtns() {
   });
 }
 
-// Check if all images were loaded
-function checkImageLoaded() {
-  const images = document.querySelectorAll('.image');
-  images.forEach((img) => img.addEventListener('load', imageLoaded));
-  function imageLoaded() {
-    state.imagesLoaded++;
-    if (state.imagesLoaded === state.totalImages) {
-      state.readyToFetch = true;
-      removeLoadingSpinner(); /* Remove Loader */
-    }
-  }
-}
-
 // Add image to favorites
 function saveFavorite(itemURL) {
   if (itemURL) {
@@ -89,16 +99,7 @@ function removeFavorite(itemURL) {
   state.currentPage === 'favorites' ? renderData(state.currentPage) : false;
 }
 
-// Add listeners to nav links
-function prepareNavLinks() {
-  const favoritesLink = document.getElementById('favorites');
-  const resultsLink = document.getElementById('results');
-  // Show on click
-  favoritesLink.addEventListener('click', showPage('favorites'));
-  resultsLink.addEventListener('click', showPage('results'));
-}
-
-// Show results or favorites container
+// Show results or favorites images
 const showPage = (page) => () => {
   state.currentPage = page;
   state.currentPage === 'favorites' ?
